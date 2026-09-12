@@ -10,7 +10,7 @@ def main():
                 0. 退出操作系统
                 ''')
 
-option=int(input("请输入你选择的操作："))
+        option=int(input("请输入你选择的操作："))
 
 if __name__=='__main__':
     main()
