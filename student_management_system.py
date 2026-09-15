@@ -1,3 +1,6 @@
+student_list=[{'id':'01','name':'小明','age':'18'}]
+
+
 def add():
     print("添加学生信息")
 def delete():
@@ -6,8 +9,11 @@ def modify():
     print("修改学生信息")
 def query():
     print("查询学生信息")
-def show():
-    print("显示学生信息")
+def show():          #显示所有学生
+    print("\n=====   学生信息   =====")
+    print("学号  姓名  年龄")
+    for stu in student_list:
+        print(stu['id'],stu['name'],stu['age'],sep= "   ")
 
 
 def main():
