@@ -1,8 +1,27 @@
-student_list=[{'id':'01','name':'小明','age':'18'}]
+student_list=[{'id':1,'name':'小明','age':18}]
 
 
-def add():
-    print("添加学生信息")
+def add():  #添加学生信息
+    print("\n====  添加学生信息  ====")
+    ex=input("退出请按n/N，继续请按任意键：")
+    if ex=="n" or ex=="N":
+        return
+    while True:
+        id=input("学号:").strip()   #输入学生信息
+        name=input("姓名:").strip()
+        age=input("年龄:").strip()
+        if id=="n" or id=="N":
+            break
+        if name=="n" or name=="N":
+            break
+        if age=="n" or age=="N":
+            break
+        for stu_id in student_list:
+            if int(stu_id['id'])==int(id):
+                print("id重复，请换一个id")
+            else:
+                student_list.append({'id':int(id),'name':name,'age':int(age)})
+                return
 def delete():
     print("删除学生信息")
 def modify():
