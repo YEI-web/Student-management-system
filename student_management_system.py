@@ -22,8 +22,21 @@ def add():           #添加学生信息
             else:
                 student_list.append({'id':int(id),'name':name,'age':int(age)})
                 return
-def delete():
-    print("删除学生信息")
+def delete():        #删除学生信息
+    stu_id = int(input("输入需要删除学生的学号："))
+    for stu in student_list:
+        if stu['id'] == stu_id:
+            print("\n=====   学生信息   =====")
+            print("学号  姓名  年龄")
+            print(stu['id'], stu['name'], stu['age'], sep="   ")
+            confirm=input("是否删除该学生(Y/N)").strip()
+            if confirm=="Y" or "y":
+                student_list.remove(stu)
+                print(f"学号为{stu_id}的学生已被删除")
+            else:
+                return
+            return
+    print("你要删除的学生不存在！")
 def modify():
     print("修改学生信息")
 def query():         #查询学生信息
