@@ -1,7 +1,7 @@
 student_list=[{'id':1,'name':'小明','age':18}]
 
 
-def add():  #添加学生信息
+def add():           #添加学生信息
     print("\n====  添加学生信息  ====")
     ex=input("退出请按n/N，继续请按任意键：")
     if ex=="n" or ex=="N":
@@ -22,12 +22,32 @@ def add():  #添加学生信息
             else:
                 student_list.append({'id':int(id),'name':name,'age':int(age)})
                 return
-def delete():
-    print("删除学生信息")
+def delete():        #删除学生信息
+    stu_id = int(input("输入需要删除学生的学号："))
+    for stu in student_list:
+        if stu['id'] == stu_id:
+            print("\n=====   学生信息   =====")
+            print("学号  姓名  年龄")
+            print(stu['id'], stu['name'], stu['age'], sep="   ")
+            confirm=input("是否删除该学生(Y/N)").strip()
+            if confirm=="Y" or "y":
+                student_list.remove(stu)
+                print(f"学号为{stu_id}的学生已被删除")
+            else:
+                return
+            return
+    print("你要删除的学生不存在！")
 def modify():
     print("修改学生信息")
-def query():
-    print("查询学生信息")
+def query():         #查询学生信息
+    stu_id=int(input("输入查询学生的学号："))
+    for stu in student_list:
+        if stu['id'] == stu_id:
+            print("\n=====   学生信息   =====")
+            print("学号  姓名  年龄")
+            print(stu['id'], stu['name'], stu['age'], sep="   ")
+            return
+    print("你查找的学生不存在！")
 def show():          #显示所有学生
     print("\n=====   学生信息   =====")
     print("学号  姓名  年龄")
