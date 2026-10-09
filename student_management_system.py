@@ -1,5 +1,22 @@
-student_list=[{'id':1,'name':'小明','age':18}]
+# student_list=[{'id':1,'name':'小明','age':18}]
+import json
+#数据文件路径
+STUDENT_FILE="students.json"
+def load_students():
+    """从文件加载学生数据"""
+    try:
+        with open(STUDENT_FILE,'r',encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError,json.decoder.JSONDecodeError):
+        return []
 
+
+def save_students(students):
+    """保存学生数据到文件"""
+    with open(STUDENT_FILE,'w',encoding='utf-8') as f:
+        json.dump(students,f,ensure_ascii=False,indent=4)
+
+student_list=load_students()
 
 def add():           #添加学生信息
     print("\n====  添加学生信息  ====")
@@ -7,21 +24,26 @@ def add():           #添加学生信息
     if ex=="n" or ex=="N":
         return
     while True:
-        id=input("学号:").strip()   #输入学生信息
+        stu_id=input("学号:").strip()   #输入学生信息
         name=input("姓名:").strip()
         age=input("年龄:").strip()
-        if id=="n" or id=="N":
+        if stu_id=="n" or stu_id=="N":
             break
         if name=="n" or name=="N":
             break
         if age=="n" or age=="N":
             break
-        for stu_id in student_list:
-            if int(stu_id['id'])==int(id):
+        is_duplicate=False
+        for stu in student_list:
+            if int(stu['id'])==int(stu_id):
                 print("id重复，请换一个id")
-            else:
-                student_list.append({'id':int(id),'name':name,'age':int(age)})
-                return
+                is_duplicate=True
+                break
+        if not is_duplicate:
+            student_list.append({'id':int(stu_id),'name':name,'age':int(age)})
+            save_students(student_list)
+            print("添加成功！")
+            return
 
 def delete():        #删除学生信息
     stu_id = int(input("输入需要删除学生的学号："))
@@ -33,6 +55,7 @@ def delete():        #删除学生信息
             confirm=input("是否删除该学生(Y/N)").strip()
             if confirm=="Y" or "y":
                 student_list.remove(stu)
+                save_students(student_list)
                 print(f"学号为{stu_id}的学生已被删除")
             else:
                 return
@@ -51,7 +74,8 @@ def modify():        #修改学生信息
                 stu['id']=int(input("请输入学号："))
                 stu['name']=input("请输入姓名：")
                 stu['age']=int(input('请输入年龄；'))
-            return
+                save_students(student_list)
+                return
     print("你查找的学生不存在！")
 
 def query():         #查询学生信息
