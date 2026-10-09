@@ -53,7 +53,7 @@ def delete():        #删除学生信息
             print("学号  姓名  年龄")
             print(stu['id'], stu['name'], stu['age'], sep="   ")
             confirm=input("是否删除该学生(Y/N)").strip()
-            if confirm=="Y" or "y":
+            if confirm=="Y" or confirm=="y":
                 student_list.remove(stu)
                 save_students(student_list)
                 print(f"学号为{stu_id}的学生已被删除")
@@ -70,7 +70,7 @@ def modify():        #修改学生信息
             print("学号  姓名  年龄")
             print(stu['id'], stu['name'], stu['age'], sep="   ")
             confirm=input(f"你确定修改{stu['name']}同学的信息吗？(Y/N)")
-            if confirm=="Y" or "y":
+            if confirm=="Y" or confirm=="y":
                 stu['id']=int(input("请输入学号："))
                 stu['name']=input("请输入姓名：")
                 stu['age']=int(input('请输入年龄；'))
